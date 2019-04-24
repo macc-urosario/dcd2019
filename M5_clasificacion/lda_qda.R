@@ -77,7 +77,7 @@ hov(iris$Sepal.Length ~ iris$Species)
 
 # Modelo ------------------------------------------------------------------
 
-modelo_lda <- qda(Species ~ Sepal.Width + Sepal.Length + Petal.Length +
+modelo_lda <- lda(Species ~ Sepal.Width + Sepal.Length + Petal.Length +
                     Petal.Width, data = iris)
 modelo_lda
 
