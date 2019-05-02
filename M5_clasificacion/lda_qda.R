@@ -4,6 +4,8 @@ library(MVN)
 library(HH)
 library(MASS)
 library(dplyr)
+library(reshape)
+library(klaR)
 
 # Graficando los histogramas de todas las variables -----------------------
 
@@ -58,7 +60,7 @@ for (k in 1:4) {
 # Probando normalidad para cada una de las variables ----------------------
 
 datos_tidy <- melt(iris, value.name = "valor")
-kable(datos_tidy %>% group_by(Species, variable) %>% summarise(p_value_Shapiro.test = round(shapiro.test(valor)$p.value,5)))
+datos_tidy %>% group_by(Species, variable) %>% summarise(p_value_Shapiro.test = round(shapiro.test(valor)$p.value,5))
 
 
 # Probando normalidad Multivariante ---------------------------------------
@@ -88,7 +90,7 @@ paste("trainig_error =", trainig_error, "%")
 
 
 partimat(Species ~ Sepal.Width + Sepal.Length + Petal.Length + Petal.Width,
-         data = iris, method = "lda", prec = 200,
+         data = iris, method = "qda", prec = 200,
          image.colors = c("darkgoldenrod1", "snow2", "skyblue2"),
          col.mean = "firebrick")
 
